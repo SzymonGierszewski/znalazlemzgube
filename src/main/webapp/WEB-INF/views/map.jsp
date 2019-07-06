@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Map</title>
+    <title>Znalazłem zgubę!</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <style>
@@ -27,9 +27,24 @@
             center: {lat: -34.397, lng: 150.644},
             zoom: 8
         });
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            addMarker(event.latLng, map);
+        });
     }
+
+    function addMarker(location, map) {
+        var marker = new google.maps.Marker({
+            position: location,
+            // label:g
+            map: map
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initMap);
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXzfkub1L3C_HWAeDD5LVQDyV_SvesJM&callback=initMap"
         async defer></script>
 </body>
 </html>

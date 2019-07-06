@@ -4,12 +4,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
-public class Announcement {
+public class Marker {
 
 //    @NotNull
 //    private Geolocation geolocation;
     @NotNull
-    private Content content;
+    private FoundObject foundObject;
     @NotNull
     private Finder finder;
     @PastOrPresent
