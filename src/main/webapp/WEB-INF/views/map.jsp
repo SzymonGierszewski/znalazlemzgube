@@ -26,7 +26,8 @@
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 51.9537505, lng: 19.1343786},
-            zoom: 6
+            zoom: 6,
+            fullscreenControl: false
         });
 
         google.maps.event.addListener(map, 'click', function(event) {
