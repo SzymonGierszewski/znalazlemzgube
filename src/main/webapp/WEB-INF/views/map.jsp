@@ -30,7 +30,7 @@
             fullscreenControl: false
         });
 
-        google.maps.event.addListener(map, 'click', function(event) {
+        google.maps.event.addListener(map, 'rightclick', function(event) {
             addMarker(event.latLng, map);
         });
 

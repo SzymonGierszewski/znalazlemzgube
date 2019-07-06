@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class Marker {
 
-//    @NotNull
-//    private Geolocation geolocation;
+    @NotNull
+    private Geolocation geolocation;
     @NotNull
     private FoundObject foundObject;
     @NotNull
