@@ -10,7 +10,7 @@
  http://www.springframework.org/schema/context
  http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-    <context:component-scan base-package="znalazlemzgube"/>
+    <context:component-scan base-package="pl.szymongierszewski"/>
     <context:annotation-config/>
     <mvc:annotation-driven />
 
@@ -19,7 +19,7 @@
             <value>/WEB-INF/views/</value>
         </property>
         <property name="suffix">
-            <value>.ftlh</value>
+            <value>.jsp</value>
         </property>
     </bean>
 </beans>
