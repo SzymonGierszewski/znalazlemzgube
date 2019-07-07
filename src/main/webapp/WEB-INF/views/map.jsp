@@ -10,8 +10,20 @@
 </head>
 <body>
 <div id="map"></div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+
+</div>
 <script>
     var map;
+    var modal = document.getElementById("myModal");
+    var spanToCloseModal = document.getElementsByClassName("close")[0];
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -22,6 +34,8 @@
 
         google.maps.event.addListener(map, 'rightclick', function (event) {
             addMarker(event.latLng, map);
+            openModalForm();
+
         });
 
         if (navigator.geolocation) {
@@ -36,15 +50,25 @@
         } else {
             map.getCenter();
         }
+
     }
 
     function addMarker(location, map) {
-        var marker = new google.maps.Marker({
+        this.marker = new google.maps.Marker({
             position: location,
             // label:
             map: map
         });
     }
+
+    function openModalForm() {
+        modal.style.display = "block";
+        spanToCloseModal.onclick = function() {
+            modal.style.display = "none";
+            marker.setMap(null);
+        }
+    }
+
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXzfkub1L3C_HWAeDD5LVQDyV_SvesJM&callback=initMap"
