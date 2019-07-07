@@ -15,8 +15,15 @@
 
     <!-- Modal content -->
     <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        <form action="/znalazlemzgube/" method="post">
+            <p><input type="text" placeholder="Opis przedmiotu" maxlength="100" required/></p>
+            <p><input type="text" placeholder="Twoje imię" minlength="3" required/></p>
+            <p><input type="email" placeholder="Twój email" required/></p>
+            <p><input type="text" placeholder="Data znalezienia zguby" required/></p>
+            <%-- Bootstrap Datepicker!--%>
+            <p><input type="submit" value="Zapisz!"/></p>
+        </form>
+        <span class="close">Anuluj</span>
     </div>
 
 </div>

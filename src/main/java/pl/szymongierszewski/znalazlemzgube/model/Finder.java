@@ -12,6 +12,6 @@ public class Finder {
     private String name;
     @Email
     private String email;
-    @Pattern(regexp = "\\d{3}-\\d{3}-\\d{3}")
-    private String phoneNo;
+//    @Pattern(regexp = "\\d{3}-\\d{3}-\\d{3}")
+//    private String phoneNo;
 }

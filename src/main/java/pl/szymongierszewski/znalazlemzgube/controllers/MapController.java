@@ -12,4 +12,9 @@ public class MapController {
         return "map";
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String addMarker() {
+        return "map";
+    }
+
 }
