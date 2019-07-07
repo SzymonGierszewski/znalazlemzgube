@@ -13,6 +13,8 @@
     <context:component-scan base-package="pl.szymongierszewski"/>
     <context:annotation-config/>
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/**" location="/resources/static/"
+                   cache-period="31556926"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
