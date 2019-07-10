@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,16 +14,28 @@
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <form id="markerForm" action="/znalazlemzgube/" method="post">
-            <input type="hidden" name="latitude"/>
-            <input type="hidden" name="longitude"/>
-            <p><input type="text" placeholder="Twoje imię" minlength="3" name="name" required/></p>
-            <p><input type="email" placeholder="Twój email" name="email" required/></p>
-            <p><input type="text" placeholder="Data znalezienia zguby" name="date" required/></p>
-            <p><input type="text" placeholder="Opis przedmiotu" maxlength="100" name="description" required/></p>
+        <form:form id="markerForm" modelAttribute="markerForm" action="/znalazlemzgube/" method="post">
+            <form:input type="hidden" name="latitude" path="latitude"/>
+            <form:input type="hidden" name="longitude" path="longitude"/>
+            <p>
+                <form:input type="text" placeholder="Twoje imię" minlength="3" name="name" path="name"/>
+                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="name"/></c:if>
+            </p>
+            <p>
+                <form:input type="email" placeholder="Twój email" name="email" path="email"/>
+                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="email"/></c:if>
+            </p>
+            <p>
+                <form:input type="text" placeholder="Data znalezienia zguby" name="date" path="date"/>
+                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="date"/></c:if>
+            </p>
+            <p>
+                <form:input type="text" placeholder="Opis przedmiotu" maxlength="100" name="description" path="description"/>
+                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="description"/></c:if>
+            </p>
         <%-- Bootstrap Datepicker!--%>
             <p><input type="submit" value="Zapisz!"/></p>
-        </form>
+        </form:form>
         <span class="close">Anuluj</span>
     </div>
 </div>

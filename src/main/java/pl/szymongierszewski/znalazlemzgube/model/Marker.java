@@ -11,10 +11,10 @@ public class Marker {
     @NotNull
     private Geolocation geolocation;
     @NotNull
-    private FoundObject foundObject;
-    @NotNull
     private Finder finder;
     @PastOrPresent
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private LocalDate date;
+    @NotNull
+    private FoundObject foundObject;
 }
