@@ -10,23 +10,23 @@
 </head>
 <body>
 <div id="map"></div>
-<!-- The Modal -->
-<div id="myModal" class="modal">
 
-    <!-- Modal content -->
+<div id="myModal" class="modal">
     <div class="modal-content">
-        <form action="/znalazlemzgube/" method="post">
-            <p><input type="text" placeholder="Opis przedmiotu" maxlength="100" required/></p>
-            <p><input type="text" placeholder="Twoje imię" minlength="3" required/></p>
-            <p><input type="email" placeholder="Twój email" required/></p>
-            <p><input type="text" placeholder="Data znalezienia zguby" required/></p>
-            <%-- Bootstrap Datepicker!--%>
+        <form id="markerForm" action="/znalazlemzgube/" method="post">
+            <input type="hidden" name="latitude"/>
+            <input type="hidden" name="longitude"/>
+            <p><input type="text" placeholder="Twoje imię" minlength="3" name="name" required/></p>
+            <p><input type="email" placeholder="Twój email" name="email" required/></p>
+            <p><input type="text" placeholder="Data znalezienia zguby" name="date" required/></p>
+            <p><input type="text" placeholder="Opis przedmiotu" maxlength="100" name="description" required/></p>
+        <%-- Bootstrap Datepicker!--%>
             <p><input type="submit" value="Zapisz!"/></p>
         </form>
         <span class="close">Anuluj</span>
     </div>
-
 </div>
+
 <script>
     var map;
     var modal = document.getElementById("myModal");
@@ -41,7 +41,8 @@
 
         google.maps.event.addListener(map, 'rightclick', function (event) {
             addMarker(event.latLng, map);
-            openModalForm();
+            assignCoordsToMarkerForm();
+            openMarkerForm();
 
         });
 
@@ -57,7 +58,6 @@
         } else {
             map.getCenter();
         }
-
     }
 
     function addMarker(location, map) {
@@ -68,7 +68,7 @@
         });
     }
 
-    function openModalForm() {
+    function openMarkerForm() {
         modal.style.display = "block";
         spanToCloseModal.onclick = function() {
             modal.style.display = "none";
@@ -76,6 +76,11 @@
         }
     }
 
+    function assignCoordsToMarkerForm(){
+        var markerFormObj = document.forms["markerForm"];
+        markerFormObj.elements["latitude"].value = marker.getPosition().lat();
+        markerFormObj.elements["longitude"].value = marker.getPosition().lng();
+    }
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXzfkub1L3C_HWAeDD5LVQDyV_SvesJM&callback=initMap"
