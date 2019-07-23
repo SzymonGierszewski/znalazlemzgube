@@ -22,6 +22,7 @@
         <javaee-api.dependency.version>8.0</javaee-api.dependency.version>
         <jstl.dependency.version>1.2</jstl.dependency.version>
         <reactive-streams.dependency.version>1.0.1</reactive-streams.dependency.version>
+        <modelmapper.dependency.version>2.3.5</modelmapper.dependency.version>
         <junit.dependency.version>4.11</junit.dependency.version>
     </properties>
 
@@ -66,6 +67,12 @@
             <groupId>org.reactivestreams</groupId>
             <artifactId>reactive-streams</artifactId>
             <version>${reactive-streams.dependency.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.dependency.version}</version>
         </dependency>
 
         <dependency>
