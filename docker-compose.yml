@@ -1,0 +1,27 @@
+version: "2"
+services:
+  db:
+    container_name: "zz-db"
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=zzdb
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
+    ports:
+      - 3306:3306
+  app:
+    container_name: "zz-app"
+    environment:
+      - JAVA_OPTS=-server -Xms512m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -XX:+UseAdaptiveSizePolicy -XX:MaxMetaspaceSize=1024m -Djava.net.preferIPv4Stack=true  -Dfile.encoding=UTF-8
+    build:
+      context: .
+    ports:
+      - 8080:8080
+      - 9990:9990
+    depends_on:
+      - db
+    links:
+      - db
+    dns: 8.8.8.8

@@ -23,6 +23,8 @@
         <jstl.dependency.version>1.2</jstl.dependency.version>
         <reactive-streams.dependency.version>1.0.1</reactive-streams.dependency.version>
         <modelmapper.dependency.version>2.3.5</modelmapper.dependency.version>
+        <hibernate-entitymanager.dependency.version>5.4.2.Final</hibernate-entitymanager.dependency.version>
+        <mysql-connector.dependency.version>6.0.6</mysql-connector.dependency.version>
         <junit.dependency.version>4.11</junit.dependency.version>
     </properties>
 
@@ -73,6 +75,20 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>${modelmapper.dependency.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate-entitymanager.dependency.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector.dependency.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
