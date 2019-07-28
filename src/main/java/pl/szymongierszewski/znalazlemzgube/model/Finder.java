@@ -5,6 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "finders")
@@ -28,6 +29,8 @@ public class Finder {
 //    @Column(name = "phone_number")
 //    private String phoneNo;
 
+    @OneToMany(mappedBy = "finder", fetch = FetchType.LAZY)
+    private List<Marker> markers;
 
     public Finder() {
     }
@@ -50,5 +53,13 @@ public class Finder {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Marker> getMarkers() {
+        return markers;
+    }
+
+    public void setMarkers(List<Marker> markers) {
+        this.markers = markers;
     }
 }

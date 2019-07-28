@@ -3,7 +3,6 @@ package pl.szymongierszewski.znalazlemzgube.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
@@ -16,12 +15,12 @@ public class Marker {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
-    @Column(name = "geolocation")
+    @OneToOne
+    @JoinColumn(name = "geolocation_id", unique = true)
     private Geolocation geolocation;
 
-    @NotNull
-    @Column(name = "finder")
+    @ManyToOne
+    @JoinColumn(name = "finder_id")
     private Finder finder;
 
     @PastOrPresent
@@ -29,8 +28,8 @@ public class Marker {
     @Column(name = "date")
     private LocalDate date;
 
-    @NotNull
-    @Column(name = "found_object")
+    @OneToOne
+    @JoinColumn(name = "found_object_id", unique = true)
     private FoundObject foundObject;
 
     public Marker() {
