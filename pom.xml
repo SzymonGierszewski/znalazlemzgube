@@ -24,7 +24,7 @@
         <reactive-streams.dependency.version>1.0.1</reactive-streams.dependency.version>
         <modelmapper.dependency.version>2.3.5</modelmapper.dependency.version>
         <hibernate.dependency.version>5.4.2.Final</hibernate.dependency.version>
-        <mysql-connector.dependency.version>6.0.6</mysql-connector.dependency.version>
+        <mysql-connector.dependency.version>8.0.16</mysql-connector.dependency.version>
         <junit.dependency.version>4.11</junit.dependency.version>
     </properties>
 
