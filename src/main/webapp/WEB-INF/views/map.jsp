@@ -11,29 +11,28 @@
 </head>
 <body>
 <div id="map"></div>
-
 <div id="myModal" class="modal">
     <div class="modal-content">
         <form:form id="markerForm" modelAttribute="markerForm" action="/znalazlemzgube/" method="post">
-            <form:input type="hidden" name="latitude" path="latitude"/>
-            <form:input type="hidden" name="longitude" path="longitude"/>
+            <form:input type="hidden" path="geolocationLatitude"/>
+            <form:input type="hidden" path="geolocationLongitude"/>
             <p>
-                <form:input type="text" placeholder="Twoje imię" minlength="3" name="name" path="name"/>
-                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="name"/></c:if>
+                <form:input type="text" placeholder="Twoje imię" minlength="3" path="finderName"/>
+                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="finderName"/></c:if>
             </p>
             <p>
-                <form:input type="email" placeholder="Twój email" name="email" path="email"/>
-                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="email"/></c:if>
+                <form:input type="email" placeholder="Twój email" path="finderEmail"/>
+                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="finderEmail"/></c:if>
             </p>
             <p>
-                <form:input type="text" placeholder="Data znalezienia zguby" name="date" path="date"/>
+                <form:input type="text" placeholder="Data znalezienia zguby" path="date"/>
                 <c:if test="${pageContext.request.method=='POST'}"><form:errors path="date"/></c:if>
             </p>
             <p>
-                <form:input type="text" placeholder="Opis przedmiotu" maxlength="100" name="description" path="description"/>
-                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="description"/></c:if>
+                <form:input type="text" placeholder="Opis przedmiotu" maxlength="100" path="foundObjectDescription"/>
+                <c:if test="${pageContext.request.method=='POST'}"><form:errors path="foundObjectDescription"/></c:if>
             </p>
-        <%-- Bootstrap Datepicker!--%>
+            <%-- Bootstrap Datepicker!--%>
             <p><input type="submit" value="Zapisz!"/></p>
         </form:form>
         <span class="close">Anuluj</span>
@@ -81,18 +80,18 @@
         });
     }
 
+    function assignCoordsToMarkerForm() {
+        var markerFormObj = document.forms["markerForm"];
+        markerFormObj.elements["geolocationLatitude"].value = marker.getPosition().lat();
+        markerFormObj.elements["geolocationLongitude"].value = marker.getPosition().lng();
+    }
+
     function openMarkerForm() {
         modal.style.display = "block";
-        spanToCloseModal.onclick = function() {
+        spanToCloseModal.onclick = function () {
             modal.style.display = "none";
             marker.setMap(null);
         }
-    }
-
-    function assignCoordsToMarkerForm(){
-        var markerFormObj = document.forms["markerForm"];
-        markerFormObj.elements["latitude"].value = marker.getPosition().lat();
-        markerFormObj.elements["longitude"].value = marker.getPosition().lng();
     }
 
 </script>

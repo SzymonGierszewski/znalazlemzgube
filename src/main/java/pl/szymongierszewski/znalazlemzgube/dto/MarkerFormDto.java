@@ -8,51 +8,51 @@ import java.time.LocalDate;
 public class MarkerFormDto {
 
     @NotNull
-    private Double latitude;
+    private Double geolocationLatitude;
     @NotNull
-    private Double longitude;
+    private Double geolocationLongitude;
     @NotBlank
     @Size(min = 3)
-    private String name;
+    private String finderName;
     @Email
-    private String email;
+    private String finderEmail;
     @PastOrPresent
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private LocalDate date;
     @NotBlank
     @Size(max = 100)
-    private String description;
+    private String foundObjectDescription;
 
-    public Double getLatitude() {
-        return latitude;
+    public Double getGeolocationLatitude() {
+        return geolocationLatitude;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+    public void setGeolocationLatitude(Double geolocationLatitude) {
+        this.geolocationLatitude = geolocationLatitude;
     }
 
-    public Double getLongitude() {
-        return longitude;
+    public Double getGeolocationLongitude() {
+        return geolocationLongitude;
     }
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setGeolocationLongitude(Double geolocationLongitude) {
+        this.geolocationLongitude = geolocationLongitude;
     }
 
-    public String getName() {
-        return name;
+    public String getFinderName() {
+        return finderName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFinderName(String finderName) {
+        this.finderName = finderName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFinderEmail() {
+        return finderEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFinderEmail(String finderEmail) {
+        this.finderEmail = finderEmail;
     }
 
     public LocalDate getDate() {
@@ -63,11 +63,11 @@ public class MarkerFormDto {
         this.date = date;
     }
 
-    public String getDescription() {
-        return description;
+    public String getFoundObjectDescription() {
+        return foundObjectDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFoundObjectDescription(String foundObjectDescription) {
+        this.foundObjectDescription = foundObjectDescription;
     }
 }

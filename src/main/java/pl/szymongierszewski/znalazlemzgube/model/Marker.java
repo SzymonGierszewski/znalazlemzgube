@@ -15,12 +15,12 @@ public class Marker {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "geolocation_id", unique = true)
     private Geolocation geolocation;
 
-    @ManyToOne
-    @JoinColumn(name = "finder_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "finder_id", unique = true)
     private Finder finder;
 
     @PastOrPresent
@@ -28,7 +28,7 @@ public class Marker {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "found_object_id", unique = true)
     private FoundObject foundObject;
 

@@ -25,7 +25,8 @@ public class PersistenceConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://db:3306/zzdb");
+//        dataSource.setUrl("jdbc:mysql://db:3306/zzdb");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/zzdb");
         dataSource.setUsername("root");
         dataSource.setPassword("password");
         return dataSource;

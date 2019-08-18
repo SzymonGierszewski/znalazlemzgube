@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import pl.szymongierszewski.znalazlemzgube.dao.MarkerDao;
 import pl.szymongierszewski.znalazlemzgube.dto.MarkerFormDto;
 import pl.szymongierszewski.znalazlemzgube.model.Marker;
 
@@ -18,6 +19,9 @@ public class MapController {
 
     @Autowired
     ModelMapper modelMapper;
+
+    @Autowired
+    MarkerDao markerDao;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView displayMap() {
@@ -30,6 +34,7 @@ public class MapController {
             return "error";
         } else {
             Marker marker = modelMapper.map(markerFormDto, Marker.class);
+            markerDao.save(marker);
             return "map";
         }
     }
