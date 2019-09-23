@@ -10,5 +10,6 @@ public class AppConfig {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+        //TODO configuration -> change MarkerDto variable names
     }
 }

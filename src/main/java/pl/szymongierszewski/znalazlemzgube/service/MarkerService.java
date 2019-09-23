@@ -7,6 +7,9 @@ import pl.szymongierszewski.znalazlemzgube.dao.MarkerDao;
 import pl.szymongierszewski.znalazlemzgube.dto.MarkerFormDto;
 import pl.szymongierszewski.znalazlemzgube.model.Marker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MarkerService {
 
@@ -17,6 +20,14 @@ public class MarkerService {
     public MarkerService(ModelMapper modelMapper, MarkerDao markerDao) {
         this.modelMapper = modelMapper;
         this.markerDao = markerDao;
+    }
+
+    public List<MarkerFormDto> getMarkerDtoList() {
+        List<MarkerFormDto> markerFormDtoList = new ArrayList<>();
+        markerDao.findAll()
+                .forEach(marker -> markerFormDtoList.add(
+                        modelMapper.map(marker, MarkerFormDto.class)));
+        return markerFormDtoList;
     }
 
     public void createMarker(MarkerFormDto markerFormDto) {
