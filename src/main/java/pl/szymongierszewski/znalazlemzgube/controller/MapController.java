@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import pl.szymongierszewski.znalazlemzgube.dto.MarkerFormDto;
+import pl.szymongierszewski.znalazlemzgube.dto.MarkerDto;
 import pl.szymongierszewski.znalazlemzgube.service.MarkerService;
 
 import javax.validation.Valid;
@@ -26,21 +26,21 @@ public class MapController {
 
     @GetMapping("/")
     public ModelAndView displayMap() {
-        return new ModelAndView("map", "markerForm", new MarkerFormDto());
+        return new ModelAndView("map", "markerForm", new MarkerDto());
     }
 
     @GetMapping(value = "/markers/json")
     @ResponseBody
-    public List<MarkerFormDto> displayMarkers() {
+    public List<MarkerDto> displayMarkers() {
         return markerService.getMarkerDtoList();
     }
 
     @PostMapping("/")
-    public String addMarker(@ModelAttribute("markerForm") @Valid MarkerFormDto markerFormDto, BindingResult bindingResult) {
+    public String addMarker(@ModelAttribute("markerForm") @Valid MarkerDto markerDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "error";
         } else {
-            markerService.createMarker(markerFormDto);
+            markerService.createMarker(markerDto);
             return "map";
         }
     }

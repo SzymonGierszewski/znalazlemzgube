@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.szymongierszewski.znalazlemzgube.dao.MarkerDao;
-import pl.szymongierszewski.znalazlemzgube.dto.MarkerFormDto;
+import pl.szymongierszewski.znalazlemzgube.dto.MarkerDto;
 import pl.szymongierszewski.znalazlemzgube.model.Marker;
 
 import java.util.ArrayList;
@@ -22,16 +22,16 @@ public class MarkerService {
         this.markerDao = markerDao;
     }
 
-    public List<MarkerFormDto> getMarkerDtoList() {
-        List<MarkerFormDto> markerFormDtoList = new ArrayList<>();
+    public List<MarkerDto> getMarkerDtoList() {
+        List<MarkerDto> markerDtoList = new ArrayList<>();
         markerDao.findAll()
-                .forEach(marker -> markerFormDtoList.add(
-                        modelMapper.map(marker, MarkerFormDto.class)));
-        return markerFormDtoList;
+                .forEach(marker -> markerDtoList.add(
+                        modelMapper.map(marker, MarkerDto.class)));
+        return markerDtoList;
     }
 
-    public void createMarker(MarkerFormDto markerFormDto) {
-        Marker marker = modelMapper.map(markerFormDto, Marker.class);
+    public void createMarker(MarkerDto markerDto) {
+        Marker marker = modelMapper.map(markerDto, Marker.class);
         markerDao.save(marker);
     }
 

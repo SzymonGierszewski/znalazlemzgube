@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-public class MarkerFormDto {
+public class MarkerDto {
 
     @NotNull
     private Double geolocationLatitude;
