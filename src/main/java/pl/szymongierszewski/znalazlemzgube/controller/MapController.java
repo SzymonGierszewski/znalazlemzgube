@@ -4,9 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.szymongierszewski.znalazlemzgube.dao.MarkerDao;
 import pl.szymongierszewski.znalazlemzgube.dto.MarkerFormDto;
@@ -17,18 +17,21 @@ import javax.validation.Valid;
 @Controller
 public class MapController {
 
-    @Autowired
-    ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+    private final MarkerDao markerDao;
 
     @Autowired
-    MarkerDao markerDao;
+    public MapController(ModelMapper modelMapper, MarkerDao markerDao) {
+        this.modelMapper = modelMapper;
+        this.markerDao = markerDao;
+    }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping("/")
     public ModelAndView displayMap() {
         return new ModelAndView("map", "markerForm", new MarkerFormDto());
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping("/")
     public String addMarker(@ModelAttribute("markerForm") @Valid MarkerFormDto markerFormDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "error";
