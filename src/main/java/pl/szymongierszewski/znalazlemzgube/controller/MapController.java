@@ -41,7 +41,7 @@ public class MapController {
             return "error";
         } else {
             markerService.createMarker(markerDto);
-            return "map";
+            return "redirect:/";
         }
     }
 }
