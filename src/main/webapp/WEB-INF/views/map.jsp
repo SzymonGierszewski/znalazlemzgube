@@ -51,13 +51,6 @@
             fullscreenControl: false
         });
 
-        google.maps.event.addListener(map, 'rightclick', function (event) {
-            addMarker(event.latLng, map);
-            assignCoordsToMarkerForm();
-            openMarkerForm();
-
-        });
-
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 var pos = {
@@ -70,9 +63,39 @@
         } else {
             map.getCenter();
         }
+
+        addStoredMarkers();
+        addMarker();
+
     }
 
-    function addMarker(location, map) {
+    function addStoredMarkers() {
+        $.getJSON("http://localhost:8080/znalazlemzgube/markers/json", function (markerList) {
+            // if (markerList != null) {
+            for (var i = 0; i < markerList.length; i++) {
+                var pos = {
+                    lat: markerList[i].geolocationLatitude,
+                    lng: markerList[i].geolocationLongitude
+                };
+                var marker = new google.maps.Marker({
+                    position: pos
+                });
+                marker.setMap(map);
+            }
+            // }
+        })
+    }
+
+    function addMarker() {
+        google.maps.event.addListener(map, 'rightclick', function (event) {
+            createMarker(event.latLng, map);
+            assignCoordsToMarkerForm();
+            openMarkerForm();
+
+        });
+    }
+
+    function createMarker(location, map) {
         this.marker = new google.maps.Marker({
             position: location,
             // label:
@@ -95,6 +118,7 @@
     }
 
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXzfkub1L3C_HWAeDD5LVQDyV_SvesJM&callback=initMap"
         async defer></script>
 </body>
