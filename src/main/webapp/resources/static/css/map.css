@@ -10,6 +10,19 @@ html, body {
     padding: 0;
 }
 
+.topnav {
+    /*background-color: #333;*/
+    overflow: hidden;
+}
+
+.topnav input#searchBox {
+    float: left;
+}
+
+.topnav a#login {
+    float: right;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

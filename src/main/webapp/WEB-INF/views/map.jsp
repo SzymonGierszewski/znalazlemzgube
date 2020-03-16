@@ -10,6 +10,12 @@
     <link href="<c:url value="/resources/css/map.css" />" rel="stylesheet">
 </head>
 <body>
+<div class="topnav">
+    <form id="searchForm">
+        <input id="searchBox" type="search" placeholder="Zgubiony przedmiot">
+    </form>
+    <a id="login">Zaloguj się</a>
+</div>
 <div id="map"></div>
 <div id="myModal" class="modal">
     <div class="modal-content">
@@ -58,63 +64,90 @@
                     lng: position.coords.longitude
                 };
                 map.setCenter(pos);
-                map.setZoom(10);
+                map.setZoom(12);
             });
         } else {
             map.getCenter();
         }
 
-        addStoredMarkers();
-        addMarker();
+        var markers = addStoredMarkers();
+        addNewMarker();
+        findMarkersBySearchTerm(markers);
 
     }
 
     function addStoredMarkers() {
+        var markers = [];
         $.getJSON("http://localhost:8080/znalazlemzgube/markers/json", function (markerList) {
-            // if (markerList != null) {
             for (var i = 0; i < markerList.length; i++) {
-                var pos = {
-                    lat: markerList[i].geolocationLatitude,
-                    lng: markerList[i].geolocationLongitude
-                };
                 var marker = new google.maps.Marker({
-                    position: pos
+                    position: {
+                        lat: markerList[i].geolocationLatitude,
+                        lng: markerList[i].geolocationLongitude
+                    },
+                    finderEmail: markerList[i].finderEmail,
+                    finderName: markerList[i].finderName,
+                    foundObjectDescription: markerList[i].foundObjectDescription,
+                    map: map
                 });
-                marker.setMap(map);
+                addInfoWindow(marker);
+                markers.push(marker);
             }
-            // }
-        })
+        });
+        return markers;
     }
 
-    function addMarker() {
+    function addInfoWindow(marker) {
+        marker.infowindow = new google.maps.InfoWindow({
+            content: marker.foundObjectDescription
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            marker.infowindow.open(map, marker);
+        });
+    }
+
+    function addNewMarker() {
         google.maps.event.addListener(map, 'rightclick', function (event) {
-            createMarker(event.latLng, map);
-            assignCoordsToMarkerForm();
-            openMarkerForm();
+            var marker = createMarker(event.latLng, map);
+            assignCoordsToMarkerForm(marker);
+            openMarkerForm(marker);
 
         });
     }
 
     function createMarker(location, map) {
-        this.marker = new google.maps.Marker({
+        return new google.maps.Marker({
             position: location,
-            // label:
             map: map
         });
     }
 
-    function assignCoordsToMarkerForm() {
+    function assignCoordsToMarkerForm(marker) {
         var markerFormObj = document.forms["markerForm"];
         markerFormObj.elements["geolocationLatitude"].value = marker.getPosition().lat();
         markerFormObj.elements["geolocationLongitude"].value = marker.getPosition().lng();
     }
 
-    function openMarkerForm() {
+    function openMarkerForm(marker) {
         modal.style.display = "block";
         spanToCloseModal.onclick = function () {
             modal.style.display = "none";
             marker.setMap(null);
         }
+    }
+
+    function findMarkersBySearchTerm(markers) {
+        document.getElementById("searchForm").addEventListener('submit', function (evt) {
+            var searchTerm = document.getElementById("searchBox").value;
+            markers.forEach(function (marker) {
+                if (marker.foundObjectDescription.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    marker.infowindow.open(map, marker);
+                } else {
+                    marker.infowindow.close();
+                }
+            });
+            evt.preventDefault();
+        });
     }
 
 </script>
